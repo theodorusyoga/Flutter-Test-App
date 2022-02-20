@@ -15,6 +15,7 @@ class SearchInputStyles {
 
   final TextStyle searchTextStyle = TextStyle(
     backgroundColor: colors[ColorName.transparent],
+    color: colors[ColorName.primary],
   );
 
   final TextStyle placeholderTextStyle = TextStyle(

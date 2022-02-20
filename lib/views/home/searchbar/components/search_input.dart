@@ -63,18 +63,25 @@ class _SearchInputState extends State<SearchInput>
     final styles = SearchInputStyles();
 
     var _focusNode = FocusNode();
-    var _focusableSearchTextField = CupertinoTextField(
-      decoration: styles.textFieldDecoration,
-      onChanged: (String text) => widget.onSearchTextChanged(text),
-      focusNode: _focusNode,
-      style: styles.searchTextStyle,
-      padding: styles.searchBoxPadding,
-    );
-
     void focusOnSearchTextField() {
       FocusScope.of(context).requestFocus(_focusNode);
       _focusNode.requestFocus();
     }
+
+    var _focusableSearchTextField = CupertinoTextField(
+      decoration: styles.textFieldDecoration,
+      onChanged: (String text) {
+        widget.onSearchTextChanged(text);
+        if (text == "") {
+          for (var i = 0; i < controllers.length; i++) {
+            setAnimation(i);
+          }
+        }
+      },
+      focusNode: _focusNode,
+      style: styles.searchTextStyle,
+      padding: styles.searchBoxPadding,
+    );
 
     var _index = 0;
     List<Widget> _placeholderTexts = widget.hintTexts.map<Widget>((hintText) {
@@ -101,15 +108,15 @@ class _SearchInputState extends State<SearchInput>
     List<Widget> _placeholderTransitions =
         _placeholderTexts.map<Widget>((placeholderText) {
       return CupertinoButton(
-        minSize: 0,
-        child: placeholderText,
-        onPressed: () {
-          // implement focus to text field
-          focusOnSearchTextField();
-        },
-        padding: styles.placeholderButtonPadding,
-        pressedOpacity: 1,
-      );
+          minSize: 0,
+          child: placeholderText,
+          onPressed: () {
+            // implement focus to text field
+            focusOnSearchTextField();
+          },
+          padding: styles.placeholderButtonPadding,
+          pressedOpacity: 1,
+          disabledColor: colors[ColorName.transparent]!);
     }).toList();
 
     var textFieldStack = Stack(
@@ -117,12 +124,12 @@ class _SearchInputState extends State<SearchInput>
         _focusableSearchTextField,
         // Use custom placeholder for animated placeholder
         Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(color: colors[Colors.transparent]),
-                child:  widget.searchText != "" ? Container() : Stack(
-                  children: _placeholderTransitions,
-                ),
-                padding: styles.placeholderContainerPadding)
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(color: colors[Colors.transparent]),
+            child: Stack(
+              children: _placeholderTransitions,
+            ),
+            padding: styles.placeholderContainerPadding)
       ],
     );
 

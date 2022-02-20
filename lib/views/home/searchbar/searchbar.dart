@@ -63,10 +63,8 @@ class _SearchBarState extends State<SearchBar> {
     ];
 
     return Container(
-      decoration: BoxDecoration(
-        color: colors[ColorName.basicBlue],
-      ),
-      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 16, top: 16),
+      decoration: styles.blueBackground ,
+      padding: styles.searchBarPadding,
       child: Row(children: _searchBarItems),
     );
   }
