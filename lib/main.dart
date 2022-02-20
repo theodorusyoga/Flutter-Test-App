@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> {
       home: Container(
         child: SafeArea(
             child: CupertinoPageScaffold(
+              resizeToAvoidBottomInset: false,
                 child: CupertinoTabScaffold(
                     tabBar: CupertinoTabBar(items: const [
                       BottomNavigationBarItem(
@@ -99,7 +100,10 @@ class _MyAppState extends State<MyApp> {
             bottom: false),
         color: colors[ColorName.basicBlue],
       ),
-      theme: const CupertinoThemeData(brightness: Brightness.light),
+      theme: const CupertinoThemeData(
+          brightness: Brightness.light,
+          textTheme: CupertinoTextThemeData(
+              textStyle: TextStyle(fontFamily: 'OpenSans'))),
     );
     // return MaterialApp(
     //   home: Scaffold(
