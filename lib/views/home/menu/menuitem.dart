@@ -32,9 +32,9 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-    final double widthWithoutPadding = width - 32;
-    final double itemWidth = widthWithoutPadding / numberOfItems;
+    final double _width = MediaQuery.of(context).size.width;
+    final double _widthWithoutPadding = _width - 32;
+    final double _itemWidth = _widthWithoutPadding / numberOfItems;
 
     final _iconImage = Container(
       child: Center(
@@ -56,7 +56,7 @@ class MenuItem extends StatelessWidget {
           ),
           onPressed: () => onMenuItemPressed(),
           padding: _styles.buttonMenuItemPadding),
-      width: itemWidth,
+      width: _itemWidth,
       padding: _styles.menuItemPadding,
     );
   }

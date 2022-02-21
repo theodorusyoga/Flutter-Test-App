@@ -12,6 +12,7 @@ enum ColorName {
   xperiencePink,
   orangeEats,
   financialDarkBlue,
+  orangeTooltip,
 }
 
 const Map<ColorName, Color> colors = {
@@ -25,4 +26,5 @@ const Map<ColorName, Color> colors = {
   ColorName.xperiencePink: Color.fromARGB(255, 255, 108, 106),
   ColorName.orangeEats: Color.fromARGB(255, 248, 111, 9),
   ColorName.financialDarkBlue: Color.fromARGB(255, 5, 62, 104),
+  ColorName.orangeTooltip: Color.fromARGB(255, 226, 88, 36),
 };

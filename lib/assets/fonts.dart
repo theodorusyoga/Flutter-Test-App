@@ -8,3 +8,9 @@ final TextStyle regularTextStyle = TextStyle(
 
 final TextStyle regularTextStyleBold =
     regularTextStyle.merge(const TextStyle(fontWeight: FontWeight.w600));
+
+final TextStyle normalTextStyle =
+    regularTextStyle.merge(const TextStyle(fontSize: 14));
+
+final TextStyle normalTextStyleBold =
+    regularTextStyleBold.merge(const TextStyle(fontSize: 14));
