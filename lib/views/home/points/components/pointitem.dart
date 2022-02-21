@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../model/point_model.dart';
 import '../../../../assets/colors.dart';
 import './styles.dart';
+import '../../../../helpers/currency.dart';
 
 class PointItem extends StatelessWidget {
   PointItem({Key? key, required this.pointModel}) : super(key: key);
@@ -37,12 +37,13 @@ class PointItem extends StatelessWidget {
                     pointModel.activationActionName ?? '',
                     style: _styles.buttonText,
                   ),
-                  onPressed: () => pointModel.activationPressed!() ?? () {},
+                  onPressed: () => (pointModel.activationPressed ?? () {})(),
                   padding: _styles.buttonPadding,
                   minSize: 0,
                   color: colors[ColorName.white],
                   borderRadius: _styles.buttonBorderRadius)
-              : Text(pointModel.point.toString(), style: _styles.pointItemText)
+              : Text((pointModel.point ?? 0).toCurrencyWithoutSymbol(),
+                  style: _styles.pointItemText)
         ],
       ),
       padding: _styles.pointItemPadding,
