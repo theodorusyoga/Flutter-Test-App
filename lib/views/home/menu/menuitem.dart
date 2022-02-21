@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import '../../../assets/colors.dart';
 import '../../../assets/fonts.dart';

@@ -5,13 +5,6 @@ import '../../../assets/colors.dart';
 import './menuitem.dart';
 import './styles.dart';
 
-class Menu extends StatefulWidget {
-  const Menu({Key? key}) : super(key: key);
-
-  @override
-  _MenuState createState() => _MenuState();
-}
-
 var menuItems = <MenuModel>[
   MenuModel(
       icon: Icons.flight,
@@ -77,8 +70,10 @@ var menuItems = <MenuModel>[
       bgColor: colors[ColorName.financialDarkBlue])
 ];
 
-class _MenuState extends State<Menu> {
-  void _onMenuItemPressed() {
+class Menu extends StatelessWidget {
+  Menu({ Key? key }) : super(key: key);
+
+   void _onMenuItemPressed() {
     // implement menu item pressed
   }
 
@@ -86,7 +81,7 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> flexibleMenuItem = menuItems
+   final List<Widget> flexibleMenuItem = menuItems
         .map<Widget>((menuItem) => MenuItem(
               menuModel: menuItem,
               menuItemSize: MenuItemSize.medium,
