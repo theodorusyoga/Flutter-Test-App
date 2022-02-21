@@ -68,13 +68,15 @@ class ExploreItem extends StatelessWidget {
             children: [
               _image,
               const SizedBox(height: 8),
-              Text(exploreItem.name, style: normalTextStyleBold, textAlign: TextAlign.left),
+              Text(exploreItem.name, maxLines: 2, style: normalTextStyleBold, textAlign: TextAlign.left),
               const SizedBox(height: 4),
-              Text(exploreItem.description, style: normalTextStyle, textAlign: TextAlign.left)
+              Text(exploreItem.description, maxLines: 1, style: normalTextStyle, textAlign: TextAlign.left)
             ],
           ),
           width: imageSize,
+          height: 270,
         ),
-        onPressed: () => onPressed(exploreItem.id));
+        onPressed: () => onPressed(exploreItem.id),
+        padding: _styles.containerPadding);
   }
 }

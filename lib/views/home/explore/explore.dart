@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../../model/explore_model.dart';
 import './components/explore_item.dart';
+import './styles.dart';
 
 class Explore extends StatelessWidget {
   Explore({Key? key}) : super(key: key);
+
+  final _styles = ExploreStyles();
 
   final exploreItems = <ExploreModel>[
     ExploreModel(
@@ -45,13 +49,28 @@ class Explore extends StatelessWidget {
     // implement onpressed
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: ExploreItem(
-      exploreItem: exploreItems[0],
+  Widget _buildListItem(BuildContext context, int index) {
+    return ExploreItem(
+      exploreItem: exploreItems[index],
       onBookmarkPressed: _onBookmarkPressed,
       onPressed: _onPressed,
-    ));
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double _width = MediaQuery.of(context).size.width;
+
+    return Container(
+        width: _width,
+        padding: _styles.containerPadding,
+        height: 300,
+        child: ScrollSnapList(
+            itemBuilder: _buildListItem,
+            itemCount: exploreItems.length,
+            itemSize: 200,
+            onItemFocus: (index) {},
+            selectedItemAnchor: SelectedItemAnchor.START,
+            ));
   }
 }

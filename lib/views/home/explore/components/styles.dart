@@ -24,5 +24,7 @@ class ExploreItemStyles {
   // IMAGE
   final BoxDecoration imageContainerDecoration =
       const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)));
+
+  final EdgeInsetsGeometry containerPadding = const EdgeInsets.only(top: 0, left: 16, right: 0, bottom: 0);
   // END OF IMAGE
 }
