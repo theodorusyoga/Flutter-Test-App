@@ -74,7 +74,7 @@ class ExploreItem extends StatelessWidget {
             ],
           ),
           width: imageSize,
-          height: 270,
+          height: 275,
         ),
         onPressed: () => onPressed(exploreItem.id),
         padding: _styles.containerPadding);

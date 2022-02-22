@@ -63,7 +63,7 @@ class _SearchBarState extends State<SearchBar> {
     ];
 
     return Container(
-      decoration: styles.blueBackground ,
+      decoration: styles.blueBackground,
       padding: styles.searchBarPadding,
       child: Row(children: _searchBarItems),
     );

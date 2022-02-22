@@ -64,7 +64,7 @@ class Explore extends StatelessWidget {
     return Container(
         width: _width,
         padding: _styles.containerPadding,
-        height: 300,
+        height: 305,
         child: ScrollSnapList(
             itemBuilder: _buildListItem,
             itemCount: exploreItems.length,
