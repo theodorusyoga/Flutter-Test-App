@@ -44,28 +44,28 @@ var exploreMocks = <ExploreModel>[
       exploreItems: <ExploreItemModel>[
         ExploreItemModel(
           id: 'uuid-example-1',
-          name: 'RSIA Bina Medika',
+          name: 'RSIA Bina Medika International',
           description: 'Hospital',
           location: 'Bintaro',
           imagePath: 'lib/assets/images/sambal_matah.jpg',
         ),
         ExploreItemModel(
           id: 'uuid-example-2',
-          name: 'RSIA Bina Medika',
+          name: 'RSIA Bina Medika International',
           description: 'Hospital',
           location: 'Bintaro',
           imagePath: 'lib/assets/images/sambal_matah.jpg',
         ),
         ExploreItemModel(
           id: 'uuid-example-3',
-          name: 'RSIA Bina Medika',
+          name: 'RSIA Bina Medika International',
           description: 'Hospital',
           location: 'Bintaro',
           imagePath: 'lib/assets/images/sambal_matah.jpg',
         ),
         ExploreItemModel(
           id: 'uuid-example-4',
-          name: 'RSIA Bina Medika',
+          name: 'RSIA Bina Medika International',
           description: 'Hospital',
           location: 'Bintaro',
           imagePath: 'lib/assets/images/sambal_matah.jpg',
