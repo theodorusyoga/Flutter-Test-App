@@ -6,6 +6,7 @@ import './menu/menu.dart';
 import './points/points.dart';
 
 import '../../mocks/explore_data.dart';
+import '../../mocks/menu_data.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _HomeState extends State<Home> {
 
     final _explores = exploreMocks.map((explore) => Explore(explore: explore));
 
-    final _contents = [Points(), Menu(), ..._explores];
+    final _contents = [Points(), Menu(menus: [menuMocks, menuMocks, menuMocks]), ..._explores];
 
     final double _screenHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.bottom;

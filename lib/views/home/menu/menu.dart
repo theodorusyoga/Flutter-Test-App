@@ -2,77 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../model/menu_model.dart';
-import '../../../assets/colors.dart';
 import './menuitem.dart';
 import './styles.dart';
 
-var menuItems = <MenuModel>[
-  MenuModel(
-      icon: Icons.flight,
-      menuName: "Flights",
-      bgColor: colors[ColorName.flightBlue]),
-  MenuModel(
-      icon: Icons.maps_home_work,
-      menuName: "Hotels",
-      bgColor: colors[ColorName.hotelDarkBlue]),
-  MenuModel(
-      icon: Icons.check,
-      menuName: "Xperience",
-      bgColor: colors[ColorName.xperiencePink]),
-  MenuModel(
-      icon: Icons.fastfood,
-      menuName: "Eats",
-      bgColor: colors[ColorName.orangeEats]),
-  MenuModel(
-      icon: Icons.attach_money,
-      menuName: "Financial",
-      bgColor: colors[ColorName.financialDarkBlue]),
-  // DUPLICATED FOR SECOND ROW
-  MenuModel(
-      icon: Icons.flight,
-      menuName: "Flights",
-      bgColor: colors[ColorName.flightBlue]),
-  MenuModel(
-      icon: Icons.maps_home_work,
-      menuName: "Hotels",
-      bgColor: colors[ColorName.hotelDarkBlue]),
-  MenuModel(
-      icon: Icons.check,
-      menuName: "Xperience",
-      bgColor: colors[ColorName.xperiencePink]),
-  MenuModel(
-      icon: Icons.fastfood,
-      menuName: "Eats",
-      bgColor: colors[ColorName.orangeEats]),
-  MenuModel(
-      icon: Icons.attach_money,
-      menuName: "Financial",
-      bgColor: colors[ColorName.financialDarkBlue]),
-  // DUPLICATED FOR THIRD ROW
-  MenuModel(
-      icon: Icons.flight,
-      menuName: "Flights",
-      bgColor: colors[ColorName.flightBlue]),
-  MenuModel(
-      icon: Icons.maps_home_work,
-      menuName: "Hotels",
-      bgColor: colors[ColorName.hotelDarkBlue]),
-  MenuModel(
-      icon: Icons.check,
-      menuName: "Xperience",
-      bgColor: colors[ColorName.xperiencePink]),
-  MenuModel(
-      icon: Icons.fastfood,
-      menuName: "Eats",
-      bgColor: colors[ColorName.orangeEats]),
-  MenuModel(
-      icon: Icons.attach_money,
-      menuName: "Financial",
-      bgColor: colors[ColorName.financialDarkBlue])
-];
-
 class Menu extends StatefulWidget {
-  Menu({Key? key}) : super(key: key);
+  const Menu({Key? key, required this.menus}) : super(key: key);
+
+  final List<List<MenuModel>> menus;
 
   @override
   State<Menu> createState() => _MenuState();
@@ -91,15 +27,7 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _flexibleMenuItem1 = menuItems
-        .map<Widget>((menuItem) => MenuItem(
-              menuModel: menuItem,
-              menuItemSize: MenuItemSize.medium,
-              onMenuItemPressed: () => _onMenuItemPressed(),
-            ))
-        .toList();
-
-    final List<Widget> _flexibleMenuItem2 = menuItems
+    List<Widget> _renderMenuItem(List<MenuModel> menuItems) => menuItems
         .map<Widget>((menuItem) => MenuItem(
               menuModel: menuItem,
               menuItemSize: MenuItemSize.medium,
@@ -113,7 +41,7 @@ class _MenuState extends State<Menu> {
       });
     }
 
-    List<Widget> _gestureIndicator = [1, 2]
+    List<Widget> _gestureIndicator = widget.menus
         .asMap()
         .entries
         .map((entry) => GestureDetector(
@@ -130,26 +58,21 @@ class _MenuState extends State<Menu> {
             )))
         .toList();
 
+    List<Widget> _menus = widget.menus
+        .map<Widget>((menu) => Container(
+              child: Wrap(
+                children: _renderMenuItem(menu),
+                runSpacing: 16,
+              ),
+              padding: _styles.menuPadding,
+            ))
+        .toList();
+
     return Column(
       children: [
         CarouselSlider(
           carouselController: _controller,
-          items: [
-            Container(
-              child: Wrap(
-                children: _flexibleMenuItem1,
-                runSpacing: 16,
-              ),
-              padding: _styles.menuPadding,
-            ),
-            Container(
-              child: Wrap(
-                children: _flexibleMenuItem2,
-                runSpacing: 16,
-              ),
-              padding: _styles.menuPadding,
-            )
-          ],
+          items: _menus,
           options: _styles.carouselOptions(_onCarouselPageChanged),
         ),
         Row(
