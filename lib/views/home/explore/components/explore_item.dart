@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../model/explore_model.dart';
+import '../../../../model/explore_item_model.dart';
 import '../../../../assets/colors.dart';
 import '../../../../assets/fonts.dart';
 
@@ -14,12 +14,14 @@ class ExploreItem extends StatelessWidget {
       {Key? key,
       required this.exploreItem,
       required this.onBookmarkPressed,
-      required this.onPressed})
+      required this.onPressed,
+      required this.isLastItem})
       : super(key: key);
 
-  final ExploreModel exploreItem;
+  final ExploreItemModel exploreItem;
   final Function onPressed;
   final Function onBookmarkPressed;
+  final bool isLastItem;
 
   final _styles = ExploreItemStyles();
 
@@ -37,8 +39,7 @@ class ExploreItem extends StatelessWidget {
           padding: _styles.tooltipPadding,
         ),
         CupertinoButton(
-          child:
-              Icon(Icons.bookmark, size: 32, color: colors[ColorName.white]),
+          child: Icon(Icons.bookmark, size: 32, color: colors[ColorName.white]),
           onPressed: () => onBookmarkPressed(exploreItem.id),
           minSize: 0,
           padding: _styles.bookmarkIconPadding,
@@ -61,22 +62,33 @@ class ExploreItem extends StatelessWidget {
     );
 
     return CupertinoButton(
-        child: Container(
+        child: 
+        Container(
           alignment: Alignment.topLeft,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _image,
               const SizedBox(height: 8),
-              Text(exploreItem.name, maxLines: 2, style: normalTextStyleBold, textAlign: TextAlign.left),
+              Text(exploreItem.name,
+                  maxLines: 2,
+                  style: normalTextStyleBold,
+                  textAlign: TextAlign.left),
               const SizedBox(height: 4),
-              Text(exploreItem.description, maxLines: 1, style: normalTextStyle, textAlign: TextAlign.left)
+              exploreItem.description != ""
+                  ? Text(exploreItem.description!,
+                      maxLines: 1,
+                      style: normalTextStyle,
+                      textAlign: TextAlign.left)
+                  : Container()
             ],
           ),
           width: imageSize,
           height: 275,
         ),
         onPressed: () => onPressed(exploreItem.id),
-        padding: _styles.containerPadding);
+        padding: isLastItem
+            ? _styles.lastContainerPadding
+            : _styles.containerPadding);
   }
 }

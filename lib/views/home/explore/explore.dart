@@ -3,43 +3,18 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import '../../../model/explore_model.dart';
 import './components/explore_item.dart';
+import 'components/explore_title.dart';
 import './styles.dart';
 
 class Explore extends StatelessWidget {
-  Explore({Key? key}) : super(key: key);
+  Explore(
+      {Key? key,
+      required this.explore})
+      : super(key: key);
+
+  final ExploreModel explore;
 
   final _styles = ExploreStyles();
-
-  final exploreItems = <ExploreModel>[
-    ExploreModel(
-      id: 'uuid-example-1',
-      name: 'All In One - Lookal Kitchen BSD',
-      description: 'Indonesian',
-      location: 'Serpong',
-      imagePath: 'lib/assets/images/sambal_matah.jpg',
-    ),
-    ExploreModel(
-      id: 'uuid-example-2',
-      name: 'All In One - Lookal Kitchen BSD',
-      description: 'Indonesian',
-      location: 'Serpong',
-      imagePath: 'lib/assets/images/sambal_matah.jpg',
-    ),
-    ExploreModel(
-      id: 'uuid-example-3',
-      name: 'All In One - Lookal Kitchen BSD',
-      description: 'Indonesian',
-      location: 'Serpong',
-      imagePath: 'lib/assets/images/sambal_matah.jpg',
-    ),
-    ExploreModel(
-      id: 'uuid-example-4',
-      name: 'All In One - Lookal Kitchen BSD',
-      description: 'Indonesian',
-      location: 'Serpong',
-      imagePath: 'lib/assets/images/sambal_matah.jpg',
-    )
-  ];
 
   void _onBookmarkPressed(String id) {
     // implement bookmark pressed
@@ -51,9 +26,10 @@ class Explore extends StatelessWidget {
 
   Widget _buildListItem(BuildContext context, int index) {
     return ExploreItem(
-      exploreItem: exploreItems[index],
+      exploreItem: explore.exploreItems[index],
       onBookmarkPressed: _onBookmarkPressed,
       onPressed: _onPressed,
+      isLastItem: index == explore.exploreItems.length - 1,
     );
   }
 
@@ -61,16 +37,28 @@ class Explore extends StatelessWidget {
   Widget build(BuildContext context) {
     final double _width = MediaQuery.of(context).size.width;
 
-    return Container(
-        width: _width,
-        padding: _styles.containerPadding,
-        height: 305,
-        child: ScrollSnapList(
-            itemBuilder: _buildListItem,
-            itemCount: exploreItems.length,
-            itemSize: 200,
-            onItemFocus: (index) {},
-            selectedItemAnchor: SelectedItemAnchor.START,
-            ));
+    return Column(
+      children: [
+        Container(
+          child: ExploreTitle(
+              title: explore.title,
+              description: explore.description,
+              onPressed: explore.onPressed),
+          padding: _styles.titlePadding,
+        ),
+        Container(
+            width: _width,
+            padding: _styles.containerPadding,
+            height: 305,
+            child: ScrollSnapList(
+              itemBuilder: _buildListItem,
+              itemCount: explore.exploreItems.length,
+              itemSize: 200,
+              onItemFocus: (index) {},
+              selectedItemAnchor: SelectedItemAnchor.START,
+              endOfListTolerance: 16,
+            ))
+      ],
+    );
   }
 }

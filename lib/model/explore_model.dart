@@ -1,14 +1,14 @@
+import './explore_item_model.dart';
+
 class ExploreModel {
-  String id;
-  String name;
+  String title;
   String description;
-  String location;
-  String imagePath;
+  Function onPressed;
+  List<ExploreItemModel> exploreItems;
 
   ExploreModel(
-      {required this.id,
-      required this.name,
+      {required this.title,
       required this.description,
-      required this.location,
-      required this.imagePath});
+      required this.onPressed,
+      required this.exploreItems});
 }

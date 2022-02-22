@@ -25,6 +25,19 @@ class ExploreItemStyles {
   final BoxDecoration imageContainerDecoration =
       const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)));
 
-  final EdgeInsetsGeometry containerPadding = const EdgeInsets.only(top: 0, left: 16, right: 0, bottom: 0);
+  final EdgeInsetsGeometry containerPadding =
+      const EdgeInsets.only(top: 0, left: 16, right: 0, bottom: 0);
+
+  final EdgeInsetsGeometry lastContainerPadding =
+      const EdgeInsets.only(top: 0, left: 16, right: 16, bottom: 0);
   // END OF IMAGE
+
+  // TITLE
+  final TextStyle titleTextStyle = mediumTextStyleBold;
+
+  final TextStyle descriptionTextStyle =
+      regularTextStyle.merge(secondaryTextStyle);
+
+  final EdgeInsetsGeometry buttonPadding = const EdgeInsets.all(0);
+  // END OF TITLE
 }
