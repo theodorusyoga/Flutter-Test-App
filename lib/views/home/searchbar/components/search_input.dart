@@ -25,13 +25,20 @@ class SearchInput extends StatefulWidget {
 class _SearchInputState extends State<SearchInput>
     with TickerProviderStateMixin {
   late List<AnimationController> controllers;
-  late List<bool> isPlaceholderShown;
 
   @override
   void initState() {
     super.initState();
     controllers = <AnimationController>[];
-    isPlaceholderShown = <bool>[];
+
+    for (var i = 0; i < widget.hintTexts.length; i++) {
+      controllers.add(AnimationController(
+          vsync: this, duration: const Duration(milliseconds: 300)));
+    }
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      runAnimation();
+    });
   }
 
   @override
@@ -40,6 +47,12 @@ class _SearchInputState extends State<SearchInput>
       controller.dispose();
     }
     super.dispose();
+  }
+
+  void runAnimation() {
+    for (var i = 0; i < widget.hintTexts.length; i++) {
+      setAnimation(i);
+    }
   }
 
   void setAnimation(int index) {
@@ -72,10 +85,8 @@ class _SearchInputState extends State<SearchInput>
       decoration: styles.textFieldDecoration,
       onChanged: (String text) {
         widget.onSearchTextChanged(text);
-        if (text == "") {
-          for (var i = 0; i < controllers.length; i++) {
-            setAnimation(i);
-          }
+        for (var controller in controllers) {
+          controller.reverse();
         }
       },
       focusNode: _focusNode,
@@ -86,15 +97,10 @@ class _SearchInputState extends State<SearchInput>
     var _index = 0;
     List<Widget> _placeholderTexts = widget.hintTexts.map<Widget>((hintText) {
       // define animation offset
-      AnimationController controller = AnimationController(
-          vsync: this, duration: const Duration(milliseconds: 300));
       Animation<Offset> offset =
           Tween<Offset>(begin: const Offset(0.0, 1.5), end: Offset.zero)
-              .animate(controller);
+              .animate(controllers[_index]);
 
-      isPlaceholderShown.add(false);
-      controllers.add(controller);
-      setAnimation(_index);
       _index++;
 
       return SlideTransition(
@@ -123,13 +129,15 @@ class _SearchInputState extends State<SearchInput>
       children: [
         _focusableSearchTextField,
         // Use custom placeholder for animated placeholder
-        Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(color: colors[Colors.transparent]),
-            child: Stack(
-              children: _placeholderTransitions,
-            ),
-            padding: styles.placeholderContainerPadding)
+        Opacity(
+            opacity: widget.searchText != "" ? 0 : 1,
+            child: Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(color: colors[Colors.transparent]),
+                child: Stack(
+                  children: _placeholderTransitions,
+                ),
+                padding: styles.placeholderContainerPadding))
       ],
     );
 
