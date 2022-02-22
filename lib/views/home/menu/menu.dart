@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../model/menu_model.dart';
 import '../../../assets/colors.dart';
@@ -70,10 +71,19 @@ var menuItems = <MenuModel>[
       bgColor: colors[ColorName.financialDarkBlue])
 ];
 
-class Menu extends StatelessWidget {
-  Menu({ Key? key }) : super(key: key);
+class Menu extends StatefulWidget {
+  Menu({Key? key}) : super(key: key);
 
-   void _onMenuItemPressed() {
+  @override
+  State<Menu> createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+  final CarouselController _controller = CarouselController();
+
+  int _currentCarouselIndex = 0;
+
+  void _onMenuItemPressed() {
     // implement menu item pressed
   }
 
@@ -81,7 +91,7 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final List<Widget> flexibleMenuItem = menuItems
+    final List<Widget> _flexibleMenuItem1 = menuItems
         .map<Widget>((menuItem) => MenuItem(
               menuModel: menuItem,
               menuItemSize: MenuItemSize.medium,
@@ -89,12 +99,64 @@ class Menu extends StatelessWidget {
             ))
         .toList();
 
-    return Container(
-      child: Wrap(
-        children: flexibleMenuItem,
-        runSpacing: 16,
-      ),
-      padding: _styles.menuPadding,
+    final List<Widget> _flexibleMenuItem2 = menuItems
+        .map<Widget>((menuItem) => MenuItem(
+              menuModel: menuItem,
+              menuItemSize: MenuItemSize.medium,
+              onMenuItemPressed: () => _onMenuItemPressed(),
+            ))
+        .toList();
+
+    void _onCarouselPageChanged(int index, CarouselPageChangedReason reason) {
+      setState(() {
+        _currentCarouselIndex = index;
+      });
+    }
+
+    List<Widget> _gestureIndicator = [1, 2]
+        .asMap()
+        .entries
+        .map((entry) => GestureDetector(
+            onTap: () => _controller.animateToPage(entry.key),
+            child: Container(
+              width: 8,
+              height: 8,
+              margin: _styles.indicatorMargin,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: _styles.indicatorColor(
+                    context, _currentCarouselIndex, entry.key),
+              ),
+            )))
+        .toList();
+
+    return Column(
+      children: [
+        CarouselSlider(
+          carouselController: _controller,
+          items: [
+            Container(
+              child: Wrap(
+                children: _flexibleMenuItem1,
+                runSpacing: 16,
+              ),
+              padding: _styles.menuPadding,
+            ),
+            Container(
+              child: Wrap(
+                children: _flexibleMenuItem2,
+                runSpacing: 16,
+              ),
+              padding: _styles.menuPadding,
+            )
+          ],
+          options: _styles.carouselOptions(_onCarouselPageChanged),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: _gestureIndicator,
+        )
+      ],
     );
   }
 }
