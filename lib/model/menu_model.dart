@@ -1,4 +1,4 @@
-import 'package:first_app/assets/colors.dart';
+import 'package:tvlk_test_app/assets/colors.dart';
 import 'package:flutter/cupertino.dart';
 
 class MenuModel {

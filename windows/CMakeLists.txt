@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(first_app LANGUAGES CXX)
+project(tvlk_test_app LANGUAGES CXX)
 
-set(BINARY_NAME "first_app")
+set(BINARY_NAME "tvlk_test_app")
 
 cmake_policy(SET CMP0063 NEW)
 

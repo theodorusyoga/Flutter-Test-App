@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.first_app">
+    package="com.theo.tvlk_test_app">
    <application
-        android:label="first_app"
+        android:label="TVLK Test App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

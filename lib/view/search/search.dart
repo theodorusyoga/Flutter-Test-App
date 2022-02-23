@@ -1,4 +1,4 @@
-import 'package:first_app/view/home/searchbar/searchbar.dart';
+import 'package:tvlk_test_app/view/home/searchbar/searchbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:redux/redux.dart';

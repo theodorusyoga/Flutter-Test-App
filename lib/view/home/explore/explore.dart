@@ -1,4 +1,4 @@
-import 'package:first_app/model/explore_item_model.dart';
+import 'package:tvlk_test_app/model/explore_item_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:provider/provider.dart';
