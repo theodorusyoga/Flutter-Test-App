@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:provider/provider.dart';
 import 'package:redux/redux.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 import './searchbar/searchbar.dart';
 import './menu/menu.dart';
@@ -15,6 +16,7 @@ import '../../view_model/home.dart';
 import '../../redux/actions.dart';
 import '../../redux/state.dart';
 import '../view.dart';
+import './styles.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key, required this.store}) : super(key: key);
@@ -28,6 +30,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GlobalKey<State<StatefulWidget>> headerKey = GlobalKey();
   double _headerHeight = 0;
+
+  final ScrollController? controller = ScrollController();
 
   // call getHeaderHeight after all widgets are loaded
   @override
@@ -55,12 +59,16 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final _headers = [SearchBar(key: headerKey)];
 
-    final _explores = [0, 1, 2].map((index) => Explore(index: index));
+    final _styles = HomeStyles();
+
+    final _explores = [0, 1, 2].map((index) => Explore(index: index)).toList();
 
     final _contents = [
       Points(),
       Menu(menus: [menuMocks, menuMocks, menuMocks]),
-      ..._explores
+      Column(
+        children: _explores,
+      )
     ];
 
     final double _screenHeight = MediaQuery.of(context).size.height -
@@ -80,12 +88,31 @@ class _HomeState extends State<Home> {
                       children: _headers,
                     ),
                     SizedBox(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: _contents,
-                      ),
-                      height: _contentsHeight,
-                    ),
+                        height: _contentsHeight,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _contents.length,
+                            // primary: controller == null,
+                            controller: controller,
+                            itemBuilder: (context, index) {
+                              return StickyHeader(
+                                  header: index == 2
+                                      ? Container(
+                                          height: 50,
+                                          decoration: _styles.headerDecoration,
+                                          padding: _styles.headerPadding,
+                                          alignment: Alignment.centerLeft,
+                                          child: Container(
+                                              decoration:
+                                                  _styles.headerTextDecoration,
+                                                  padding: _styles.headerTextPadding,
+                                              child: Text('For You',
+                                                  style:
+                                                      _styles.headerTextStyle)),
+                                        )
+                                      : Container(),
+                                  content: _contents[index]);
+                            })),
                   ]),
             converter: (store) => HomeViewModel.fromStore(store)));
 
