@@ -37,7 +37,8 @@ class _TvlkTestAppState extends State<TvlkTestApp> {
     }
 
     return CupertinoApp(
-      home: StoreProvider(
+      home: 
+      StoreProvider(
           store: store,
           child: Container(
             child: SafeArea(
