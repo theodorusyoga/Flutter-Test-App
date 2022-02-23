@@ -1,64 +1,26 @@
-import 'package:first_app/result.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:redux_thunk/redux_thunk.dart';
 
-import './quiz.dart';
-import './views/home/home.dart';
+import './view/home/home.dart';
 import './assets/colors.dart';
+import './redux/reducers.dart';
+import './redux/state.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const TvlkTestApp());
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class TvlkTestApp extends StatefulWidget {
+  const TvlkTestApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<TvlkTestApp> createState() => _TvlkTestAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  int _questionIndex = 0;
-  int _totalScore = 0;
-
-  final _questions = [
-    {
-      'questionText': 'What is your favorite color?',
-      'answers': [
-        {'text': 'Red', 'score': 10},
-        {'text': 'Green', 'score': 5},
-        {'text': 'Blue', 'score': 7}
-      ]
-    },
-    {
-      'questionText': 'What is your favorite animal?',
-      'answers': [
-        {'text': 'Cat', 'score': 8},
-        {'text': 'Dog', 'score': 6},
-        {'text': 'Rabbit', 'score': 9}
-      ]
-    },
-    {
-      'questionText': 'What is your favorite instructor?',
-      'answers': [
-        {'text': 'Robert', 'score': 10},
-        {'text': 'Max', 'score': 1},
-        {'text': 'Alice', 'score': 5}
-      ]
-    }
-  ];
-
-  void _answerQuestion(int score) {
-    setState(() {
-      _questionIndex++;
-      _totalScore += score;
-    });
-  }
-
-  void _resetQuiz() {
-    setState(() {
-      _questionIndex = 0;
-      _totalScore = 0;
-    });
-  }
+class _TvlkTestAppState extends State<TvlkTestApp> {
+  final store = Store(reducer,
+      initialState: TvlkTestAppState.initial(), middleware: [thunkMiddleware]);
 
   @override
   Widget build(BuildContext context) {
@@ -75,31 +37,33 @@ class _MyAppState extends State<MyApp> {
     }
 
     return CupertinoApp(
-      home: Container(
-        child: SafeArea(
-            child: CupertinoPageScaffold(
-              resizeToAvoidBottomInset: false,
-                child: CupertinoTabScaffold(
-                    tabBar: CupertinoTabBar(items: const [
-                      BottomNavigationBarItem(
-                          icon: Icon(CupertinoIcons.home), label: 'Home'),
-                      BottomNavigationBarItem(
-                          icon: Icon(CupertinoIcons.profile_circled),
-                          label: 'Profile'),
-                    ]),
-                    tabBuilder: (BuildContext context, int index) {
-                      return CupertinoTabView(
-                        builder: (BuildContext context) {
-                          return Center(
-                            child: activeScreen(index),
+      home: StoreProvider(
+          store: store,
+          child: Container(
+            child: SafeArea(
+                child: CupertinoPageScaffold(
+                    resizeToAvoidBottomInset: false,
+                    child: CupertinoTabScaffold(
+                        tabBar: CupertinoTabBar(items: const [
+                          BottomNavigationBarItem(
+                              icon: Icon(CupertinoIcons.home), label: 'Home'),
+                          BottomNavigationBarItem(
+                              icon: Icon(CupertinoIcons.profile_circled),
+                              label: 'Profile'),
+                        ]),
+                        tabBuilder: (BuildContext context, int index) {
+                          return CupertinoTabView(
+                            builder: (BuildContext context) {
+                              return Center(
+                                child: activeScreen(index),
+                              );
+                            },
                           );
-                        },
-                      );
-                    }),
-                backgroundColor: colors[ColorName.white]),
-            bottom: false),
-        color: colors[ColorName.basicBlue],
-      ),
+                        }),
+                    backgroundColor: colors[ColorName.white]),
+                bottom: false),
+            color: colors[ColorName.basicBlue],
+          )),
       theme: const CupertinoThemeData(
           brightness: Brightness.light,
           textTheme: CupertinoTextThemeData(

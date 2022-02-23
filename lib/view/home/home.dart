@@ -1,5 +1,7 @@
-import 'package:first_app/views/home/explore/explore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 
 import './searchbar/searchbar.dart';
 import './menu/menu.dart';
@@ -7,6 +9,10 @@ import './points/points.dart';
 
 import '../../mocks/explore_data.dart';
 import '../../mocks/menu_data.dart';
+import './explore/explore.dart';
+import '../../view_model/home.dart';
+import '../../redux/actions.dart';
+import '../../redux/state.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -34,13 +40,24 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void _onStoreInit(Store<TvlkTestAppState> store) {
+    // later, use this to load data from API...
+    Future.delayed(const Duration(seconds: 3), () {
+      store.dispatch(SetGlobalLoadingAction(false));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final _headers = [SearchBar(key: headerKey)];
 
     final _explores = exploreMocks.map((explore) => Explore(explore: explore));
 
-    final _contents = [Points(), Menu(menus: [menuMocks, menuMocks, menuMocks]), ..._explores];
+    final _contents = [
+      Points(),
+      Menu(menus: [menuMocks, menuMocks, menuMocks]),
+      ..._explores
+    ];
 
     final double _screenHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.bottom;
@@ -48,17 +65,23 @@ class _HomeState extends State<Home> {
         _headerHeight -
         56; // 56 is CupertinoTabBar's default height + padding
 
-    return Column(children: [
-      Column(
-        children: _headers,
-      ),
-      SizedBox(
-        child: ListView(
-          shrinkWrap: true,
-          children: _contents,
-        ),
-        height: _contentsHeight,
-      )
-    ]);
+    return StoreConnector<TvlkTestAppState, HomeViewModel>(
+        onInit: _onStoreInit,
+        builder: (_, viewModel) => viewModel.isLoading
+            ? Container()
+            : Column(children: [
+                Column(
+                  children: _headers,
+                ),
+                SizedBox(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: _contents,
+                  ),
+                  height: _contentsHeight,
+                ),
+              ]),
+        converter: (store) => HomeViewModel.fromStore(store));
+    ;
   }
 }
