@@ -18,7 +18,7 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   final styles = SearchBarStyles();
-  var _searchText = '';
+  String _searchText = '';
 
   void _onSearchTextChanged(String text) {
     setState(() {
@@ -28,7 +28,7 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    var _searchBarItems = [
+    List<Widget> _searchBarItems = [
       Expanded(
           flex: 10,
           child: Container(

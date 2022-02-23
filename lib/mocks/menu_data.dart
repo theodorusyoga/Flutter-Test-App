@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/menu_model.dart';
 import '../assets/colors.dart';
 
-var menuMocks = <MenuModel>[
+List<MenuModel> menuMocks = <MenuModel>[
   MenuModel(
       icon: Icons.flight,
       menuName: "Flights",

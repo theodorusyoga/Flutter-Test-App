@@ -33,7 +33,7 @@ class _SearchInputState extends State<SearchInput>
     super.initState();
     controllers = <AnimationController>[];
 
-    for (var i = 0; i < widget.hintTexts.length; i++) {
+    for (int i = 0; i < widget.hintTexts.length; i++) {
       controllers.add(AnimationController(
           vsync: this, duration: const Duration(milliseconds: 300)));
     }
@@ -45,14 +45,14 @@ class _SearchInputState extends State<SearchInput>
 
   @override
   void dispose() {
-    for (var controller in controllers) {
+    for (AnimationController controller in controllers) {
       controller.dispose();
     }
     super.dispose();
   }
 
   void runAnimation() {
-    for (var i = 0; i < widget.hintTexts.length; i++) {
+    for (int i = 0; i < widget.hintTexts.length; i++) {
       setAnimation(i);
     }
   }
@@ -77,7 +77,7 @@ class _SearchInputState extends State<SearchInput>
   Widget build(BuildContext context) {
     final styles = SearchInputStyles();
 
-    var _focusNode = FocusNode();
+    FocusNode _focusNode = FocusNode();
     void _onNavigateToSearch() {
       Navigator.of(context, rootNavigator: true).pushNamed('/search');
     }
@@ -87,13 +87,13 @@ class _SearchInputState extends State<SearchInput>
       _focusNode.requestFocus();
     }
 
-    var _focusableSearchTextField = CupertinoTextField(
+    Widget _focusableSearchTextField = CupertinoTextField(
       autofocus: true,
       enabled: widget.isSearchScreen == true,
       decoration: styles.textFieldDecoration,
       onChanged: (String text) {
         widget.onSearchTextChanged(text);
-        for (var controller in controllers) {
+        for (AnimationController controller in controllers) {
           controller.reverse();
         }
       },
@@ -105,7 +105,7 @@ class _SearchInputState extends State<SearchInput>
       padding: styles.searchBoxPadding,
     );
 
-    var _index = 0;
+    int _index = 0;
     List<Widget> _placeholderTexts = widget.hintTexts.map<Widget>((hintText) {
       // define animation offset
       Animation<Offset> offset =
@@ -135,7 +135,7 @@ class _SearchInputState extends State<SearchInput>
           disabledColor: colors[ColorName.transparent]!);
     }).toList();
 
-    var textFieldStack = Stack(
+    Widget textFieldStack = Stack(
       children: [
         _focusableSearchTextField,
         // Use custom placeholder for animated placeholder
@@ -151,7 +151,7 @@ class _SearchInputState extends State<SearchInput>
       ],
     );
 
-    var textFieldContainer = Row(
+    Widget textFieldContainer = Row(
       children: [
         Flexible(
             child: Container(

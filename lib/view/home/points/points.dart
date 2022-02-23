@@ -4,7 +4,7 @@ import '../../../model/point_model.dart';
 import './components/pointitem.dart';
 import './styles.dart';
 
-var pointItems = <PointModel>[
+List<PointModel> pointItems = <PointModel>[
   PointModel(icon: Icons.currency_exchange, pointName: 'Points', point: 34000),
   PointModel(
       icon: Icons.currency_exchange,

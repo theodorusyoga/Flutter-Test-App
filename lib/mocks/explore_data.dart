@@ -2,7 +2,7 @@
 import '../model/explore_model.dart';
 import '../model/explore_item_model.dart';
 
-var exploreMocks = <ExploreModel>[
+List<ExploreModel> exploreMocks = <ExploreModel>[
   ExploreModel(
       title: 'Discover your new favorite meal',
       description: 'Inspired by Eats you explored',
