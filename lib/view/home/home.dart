@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:provider/provider.dart';
 import 'package:redux/redux.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import './searchbar/searchbar.dart';
 import './menu/menu.dart';
@@ -75,45 +76,47 @@ class _HomeState extends State<Home> {
         MediaQuery.of(context).padding.bottom;
     final double _contentsHeight = _screenHeight - _headerHeight - 120;
 
+    Widget _listViewBuilder(context, index) {
+      return StickyHeader(
+          header: index == 2
+              ? Container(
+                  height: 50,
+                  decoration: _styles.headerDecoration,
+                  padding: _styles.headerPadding,
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                      decoration: _styles.headerTextDecoration,
+                      padding: _styles.headerTextPadding,
+                      child: Text('For You', style: _styles.headerTextStyle)),
+                )
+              : Container(),
+          content: _contents[index]);
+    }
+
+    Widget _loadingSpinner = Center(
+        child: SpinKitRing(color: colors[ColorName.basicBlue]!, size: 50));
+
     final Widget _home = MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ExploreViewModel())
         ],
         child: StoreConnector<TvlkTestAppState, HomeViewModel>(
             onInit: _onStoreInit,
-            builder: (_, viewModel) => viewModel.isLoading
-                ? Container()
-                : Column(children: [
-                    Column(
-                      children: _headers,
-                    ),
-                    SizedBox(
-                        height: _contentsHeight,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: _contents.length,
-                            // primary: controller == null,
-                            controller: controller,
-                            itemBuilder: (context, index) {
-                              return StickyHeader(
-                                  header: index == 2
-                                      ? Container(
-                                          height: 50,
-                                          decoration: _styles.headerDecoration,
-                                          padding: _styles.headerPadding,
-                                          alignment: Alignment.centerLeft,
-                                          child: Container(
-                                              decoration:
-                                                  _styles.headerTextDecoration,
-                                                  padding: _styles.headerTextPadding,
-                                              child: Text('For You',
-                                                  style:
-                                                      _styles.headerTextStyle)),
-                                        )
-                                      : Container(),
-                                  content: _contents[index]);
-                            })),
-                  ]),
+            builder: (_, viewModel) => Column(children: [
+                  Column(
+                    children: _headers,
+                  ),
+                  SizedBox(
+                      height: _contentsHeight,
+                      child: viewModel.isLoading
+                          ? _loadingSpinner
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: _contents.length,
+                              // primary: controller == null,
+                              controller: controller,
+                              itemBuilder: _listViewBuilder)),
+                ]),
             converter: (store) => HomeViewModel.fromStore(store)));
 
     Widget activeScreen(int index) {
