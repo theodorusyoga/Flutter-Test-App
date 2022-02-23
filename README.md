@@ -1,16 +1,40 @@
-# first_app
+# TVLK Clone App
 
-A new Flutter project.
+A clone of Traveloka landing page (but not everything 👀). My first project using Flutter.
+
+## Folder Structure
+
+> Contains folder structure for the current app
+
+    .
+    ├── ...
+    ├── lib                 # Source files
+      ├── assets            # Assets files
+        ├── fonts           # Font files
+        ├── images          # Image files
+      ├── helpers           # Helpers files (currently used for currency converter)
+      ├── mocks             # Since API is not provided, we have this folder to store any example data
+      ├── model             # MVVM Model
+      ├── redux             # Redux files (Action, State, Reducers) using Redux Thunk
+      ├── routes            # Screen route list for the app
+      ├── view              # MVVM View
+       ├── ...              # View name
+        ├── ...             # Component name
+         ├── components     # Small widgets from respective screen or components
+      ├── view_model        # MVVM View Model, since no API is provided, we use view model to retrieve data from mocks
+      ├── test              # Test files
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run the project, simply run: `flutter run`
 
-A few resources to get you started if this is your first Flutter project:
+## Packages Used
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- `carousel_slider`: used for 4x3 menu list. The user can swipe right and left through different list of menu
+- `flutter_spinkit`: for loading indicator
+- `flutter_redux` and `redux`: used for centralized state management. In the app, redux is only used to determine whether loading indicator is shown
+- `intl`: for currency converter
+- `provider`: for InheritedWidget wrapper
+- `redux_thunk`: middleware for redux, making action execution easier
+- `scroll_snap_list`: to display horizontal list view for food/services list, which is the extension of `ListView`
+- `sticky_headers`: to display the title of food/services list

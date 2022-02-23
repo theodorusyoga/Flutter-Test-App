@@ -5,6 +5,7 @@ enum ColorName {
   basicBlue,
   primary,
   secondary,
+  tertiary,
   white,
   transparent,
   flightBlue,
@@ -13,12 +14,15 @@ enum ColorName {
   orangeEats,
   financialDarkBlue,
   orangeTooltip,
+  greenBus,
+  greenGrass
 }
 
 const Map<ColorName, Color> colors = {
   ColorName.basicBlue: Color.fromARGB(255, 27, 160, 226),
   ColorName.primary: Color.fromARGB(255, 3, 18, 26),
   ColorName.secondary: Color.fromARGB(255, 188, 187, 186),
+  ColorName.tertiary: Color.fromARGB(100, 188, 187, 186),
   ColorName.white: Color.fromARGB(255, 255, 255, 255),
   ColorName.transparent: Color.fromARGB(0, 0, 0, 0),
   ColorName.flightBlue: Color.fromARGB(255, 48, 197, 247),
@@ -27,4 +31,6 @@ const Map<ColorName, Color> colors = {
   ColorName.orangeEats: Color.fromARGB(255, 248, 111, 9),
   ColorName.financialDarkBlue: Color.fromARGB(255, 5, 62, 104),
   ColorName.orangeTooltip: Color.fromARGB(255, 226, 88, 36),
+  ColorName.greenBus: Color.fromARGB(255, 128, 226, 126),
+  ColorName.greenGrass: Color.fromARGB(255, 212, 225, 87)
 };

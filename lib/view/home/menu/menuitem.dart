@@ -39,7 +39,7 @@ class MenuItem extends StatelessWidget {
     final _iconImage = Container(
       child: Center(
           child:
-              Icon(menuModel.icon, size: 26, color: colors[ColorName.white])),
+              Icon(menuModel.icon, size: 26, color: menuModel.iconColor ?? colors[ColorName.white])),
       width: iconSize,
       height: iconSize,
       decoration: _styles.imageBoxDecoration(menuModel.bgColor),
@@ -51,7 +51,7 @@ class MenuItem extends StatelessWidget {
             children: [
               _iconImage,
               const SizedBox(height: 4),
-              Text(menuModel.menuName, style: regularTextStyle)
+              Text(menuModel.menuName, style: _styles.menuItemTextStyle, textAlign: TextAlign.center,)
             ],
           ),
           onPressed: () => onMenuItemPressed(),

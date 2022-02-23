@@ -53,6 +53,8 @@ class ExploreItem extends StatelessWidget {
           Image.asset(
             exploreItem.imagePath,
             width: imageSize,
+            height: imageSize,
+            fit: BoxFit.cover,
           ),
           _imageTop,
         ],

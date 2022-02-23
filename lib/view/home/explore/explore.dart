@@ -46,7 +46,7 @@ class Explore extends StatelessWidget {
 
     return Column(
       children: [
-        explore.title != "" && explore.description != "" ?
+        explore.title != "" || explore.description != "" ?
         Container(
           child: ExploreTitle(
               title: explore.title,

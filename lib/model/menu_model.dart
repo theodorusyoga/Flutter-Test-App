@@ -5,8 +5,9 @@ class MenuModel {
   IconData icon;
   String menuName;
   Color? bgColor = colors[ColorName.primary];
+  Color? iconColor;
   bool? isNew = false;
 
   MenuModel(
-      {required this.icon, required this.menuName, this.bgColor, this.isNew });
+      {required this.icon, required this.menuName, this.bgColor, this.isNew, this.iconColor});
 }

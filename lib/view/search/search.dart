@@ -17,7 +17,7 @@ class Search extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _explores = [4, 5].map((index) => Explore(index: index)).toList();
+    final _explores = [3].map((index) => Explore(index: index)).toList();
 
     return MainView(
         store: store,

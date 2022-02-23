@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
 
     final _styles = HomeStyles();
 
-    final _explores = [0, 1, 2].map((index) => Explore(index: index)).toList();
+    final _explores = [0, 1].map((index) => Explore(index: index)).toList();
 
     final _contents = [
       Points(),

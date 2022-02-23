@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../../assets/fonts.dart';
 import '../../../assets/colors.dart';
 
 class MenuStyles {
@@ -12,6 +13,8 @@ class MenuStyles {
 
   final EdgeInsetsGeometry menuItemPadding = const EdgeInsets.only(top: 4);
   final EdgeInsetsGeometry buttonMenuItemPadding = const EdgeInsets.all(0);
+  final TextStyle menuItemTextStyle =
+      regularTextStyle.merge(const TextStyle(fontSize: 10));
   // END OF MENU ITEM
 
   // MENU
