@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../assets/colors.dart';
-import '../../../assets/fonts.dart';
 import '../../../model/menu_model.dart';
 import './styles.dart';
 
@@ -14,7 +13,7 @@ class MenuItem extends StatelessWidget {
 
   final MenuModel menuModel;
   final MenuItemSize menuItemSize;
-  final Function onMenuItemPressed;
+  final void Function() onMenuItemPressed;
   final _styles = MenuStyles();
 
   double get iconSize {

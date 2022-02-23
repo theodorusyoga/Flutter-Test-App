@@ -23,12 +23,15 @@ class MenuStyles {
   // END OF MENU
 
   // CAROUSEL SLIDER
-  CarouselOptions carouselOptions(Function onPageChanged) => CarouselOptions(
-      enableInfiniteScroll: false,
-      viewportFraction: 1.0,
-      enlargeCenterPage: false,
-      height: 275,
-      onPageChanged: (index, reason) => onPageChanged(index, reason));
+  CarouselOptions carouselOptions(
+          void Function(int index, CarouselPageChangedReason reason)
+              onPageChanged) =>
+      CarouselOptions(
+          enableInfiniteScroll: false,
+          viewportFraction: 1.0,
+          enlargeCenterPage: false,
+          height: 275,
+          onPageChanged: (index, reason) => onPageChanged(index, reason));
 
   final EdgeInsetsGeometry indicatorMargin =
       const EdgeInsets.symmetric(vertical: 8, horizontal: 4);

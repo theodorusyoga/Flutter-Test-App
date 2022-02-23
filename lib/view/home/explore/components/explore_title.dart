@@ -14,7 +14,7 @@ class ExploreTitle extends StatelessWidget {
 
   final String title;
   final String description;
-  final Function onPressed;
+  final void Function() onPressed;
 
   final _styles = ExploreItemStyles();
 

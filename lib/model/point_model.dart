@@ -6,7 +6,7 @@ class PointModel {
   int? point;
   bool? isNotActivated;
   String? activationActionName = 'Activate';
-  Function? activationPressed;
+  void Function()? activationPressed;
 
   PointModel(
       {required this.icon,

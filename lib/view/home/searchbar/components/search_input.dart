@@ -17,7 +17,7 @@ class SearchInput extends StatefulWidget {
 
   final List<String> hintTexts;
   final String searchText;
-  final Function onSearchTextChanged;
+  final void Function(String text) onSearchTextChanged;
   final bool? isSearchScreen;
 
   @override

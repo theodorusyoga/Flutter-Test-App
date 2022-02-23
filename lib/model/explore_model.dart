@@ -3,7 +3,7 @@ import './explore_item_model.dart';
 class ExploreModel {
   String title;
   String description;
-  Function onPressed;
+  void Function() onPressed;
   List<ExploreItemModel> exploreItems;
 
   ExploreModel(

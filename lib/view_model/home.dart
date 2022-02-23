@@ -5,7 +5,7 @@ import '../redux/state.dart';
 
 class HomeViewModel {
   final bool isLoading;
-  final Function setIsLoading;
+  final void Function(bool isLoading) setIsLoading;
 
   HomeViewModel({required this.isLoading, required this.setIsLoading});
 

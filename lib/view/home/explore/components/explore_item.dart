@@ -19,8 +19,8 @@ class ExploreItem extends StatelessWidget {
       : super(key: key);
 
   final ExploreItemModel exploreItem;
-  final Function onPressed;
-  final Function onBookmarkPressed;
+  final void Function(String id) onPressed;
+  final void Function(String id) onBookmarkPressed;
   final bool isLastItem;
 
   final _styles = ExploreItemStyles();
