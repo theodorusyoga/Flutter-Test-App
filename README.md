@@ -6,7 +6,7 @@ A clone of Traveloka landing page (but not everything 👀). My first project us
 
 The GIF says it all~
 
-![Alt Text](https://media.giphy.com/media/8c0gfSv26F0pN0tub3/giphy.gif)
+![Demo App](https://media.giphy.com/media/8c0gfSv26F0pN0tub3/giphy.gif)
 
 ## Folder Structure
 
