@@ -88,7 +88,8 @@ class _SearchInputState extends State<SearchInput>
     }
 
     var _focusableSearchTextField = CupertinoTextField(
-      enabled: widget.isSearchScreen == false,
+      autofocus: true,
+      enabled: widget.isSearchScreen == true,
       decoration: styles.textFieldDecoration,
       onChanged: (String text) {
         widget.onSearchTextChanged(text);

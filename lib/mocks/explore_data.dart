@@ -104,5 +104,73 @@ var exploreMocks = <ExploreModel>[
           location: 'Serpong',
           imagePath: 'lib/assets/images/sambal_matah.jpg',
         )
+      ]),
+      ExploreModel(
+      title: '',
+      description: '',
+      onPressed: () {},
+      exploreItems: <ExploreItemModel>[
+        ExploreItemModel(
+          id: 'uuid-example-1',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        ),
+        ExploreItemModel(
+          id: 'uuid-example-2',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        ),
+        ExploreItemModel(
+          id: 'uuid-example-3',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        ),
+        ExploreItemModel(
+          id: 'uuid-example-4',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        )
+      ]),
+      ExploreModel(
+      title: '',
+      description: '',
+      onPressed: () {},
+      exploreItems: <ExploreItemModel>[
+        ExploreItemModel(
+          id: 'uuid-example-1',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        ),
+        ExploreItemModel(
+          id: 'uuid-example-2',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        ),
+        ExploreItemModel(
+          id: 'uuid-example-3',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        ),
+        ExploreItemModel(
+          id: 'uuid-example-4',
+          name: 'All In One - Lookal Kitchen BSD',
+          description: 'Indonesian',
+          location: 'Serpong',
+          imagePath: 'lib/assets/images/sambal_matah.jpg',
+        )
       ])
 ];

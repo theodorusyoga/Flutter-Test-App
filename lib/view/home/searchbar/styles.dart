@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../assets/colors.dart';
+import '../../../assets/fonts.dart';
 
 class SearchBarStyles {
   SearchBarStyles();
@@ -15,4 +16,7 @@ class SearchBarStyles {
 
   final EdgeInsetsGeometry searchBarPadding =
       const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 16);
+
+  final TextStyle cancelTextStyle =
+      regularTextStyle.merge(TextStyle(color: colors[ColorName.white]));
 }

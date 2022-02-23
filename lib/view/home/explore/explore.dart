@@ -46,13 +46,14 @@ class Explore extends StatelessWidget {
 
     return Column(
       children: [
+        explore.title != "" && explore.description != "" ?
         Container(
           child: ExploreTitle(
               title: explore.title,
               description: explore.description,
               onPressed: explore.onPressed),
           padding: _styles.titlePadding,
-        ),
+        ) : Container(),
         Container(
             width: _width,
             padding: _styles.containerPadding,
