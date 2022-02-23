@@ -11,12 +11,14 @@ class SearchInput extends StatefulWidget {
       {Key? key,
       required this.hintTexts,
       required this.onSearchTextChanged,
-      required this.searchText})
+      required this.searchText,
+      this.isSearchScreen})
       : super(key: key);
 
   final List<String> hintTexts;
   final String searchText;
   final Function onSearchTextChanged;
+  final bool? isSearchScreen;
 
   @override
   State<SearchInput> createState() => _SearchInputState();
@@ -76,12 +78,17 @@ class _SearchInputState extends State<SearchInput>
     final styles = SearchInputStyles();
 
     var _focusNode = FocusNode();
-    void focusOnSearchTextField() {
+    void _onNavigateToSearch() {
+      Navigator.of(context, rootNavigator: true).pushNamed('/search');
+    }
+
+    void _focusOnSearchTextField() {
       FocusScope.of(context).requestFocus(_focusNode);
       _focusNode.requestFocus();
     }
 
     var _focusableSearchTextField = CupertinoTextField(
+      enabled: widget.isSearchScreen == false,
       decoration: styles.textFieldDecoration,
       onChanged: (String text) {
         widget.onSearchTextChanged(text);
@@ -89,6 +96,9 @@ class _SearchInputState extends State<SearchInput>
           controller.reverse();
         }
       },
+      onTap: widget.isSearchScreen == true
+          ? _focusOnSearchTextField
+          : _onNavigateToSearch,
       focusNode: _focusNode,
       style: styles.searchTextStyle,
       padding: styles.searchBoxPadding,
@@ -116,10 +126,9 @@ class _SearchInputState extends State<SearchInput>
       return CupertinoButton(
           minSize: 0,
           child: placeholderText,
-          onPressed: () {
-            // implement focus to text field
-            focusOnSearchTextField();
-          },
+          onPressed: widget.isSearchScreen == true
+              ? _focusOnSearchTextField
+              : _onNavigateToSearch,
           padding: styles.placeholderButtonPadding,
           pressedOpacity: 1,
           disabledColor: colors[ColorName.transparent]!);
