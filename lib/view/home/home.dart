@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:provider/provider.dart';
 import 'package:redux/redux.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -10,7 +9,6 @@ import './menu/menu.dart';
 import './points/points.dart';
 
 import '../../assets/colors.dart';
-import '../../view_model/explore.dart';
 import '../../mocks/menu_data.dart';
 import './explore/explore.dart';
 import '../../view_model/home.dart';
@@ -96,11 +94,7 @@ class _HomeState extends State<Home> {
     Widget _loadingSpinner = Center(
         child: SpinKitRing(color: colors[ColorName.basicBlue]!, size: 50));
 
-    final Widget _home = MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => ExploreViewModel())
-        ],
-        child: StoreConnector<TvlkTestAppState, HomeViewModel>(
+    final Widget _home = StoreConnector<TvlkTestAppState, HomeViewModel>(
             onInit: _onStoreInit,
             builder: (_, viewModel) => Column(children: [
                   Column(
@@ -117,7 +111,7 @@ class _HomeState extends State<Home> {
                               controller: controller,
                               itemBuilder: _listViewBuilder)),
                 ]),
-            converter: (store) => HomeViewModel.fromStore(store)));
+            converter: (store) => HomeViewModel.fromStore(store));
 
     Widget activeScreen(int index) {
       switch (index) {

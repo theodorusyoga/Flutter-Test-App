@@ -1,9 +1,9 @@
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tvlk_test_app/model/explore_item_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
-import 'package:provider/provider.dart';
 
-import '../../../model/explore_model.dart';
+import '../../../redux/state.dart';
 import '../../../view_model/explore.dart';
 import './components/explore_item.dart';
 import 'components/explore_title.dart';
@@ -40,34 +40,35 @@ class Explore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double _width = MediaQuery.of(context).size.width;
-    final exploreViewModel = Provider.of<ExploreViewModel>(context);
-    exploreViewModel.loadData(index);
-    final ExploreModel explore = exploreViewModel.explore;
 
-    return Column(
-      children: [
-        explore.title != "" || explore.description != "" ?
-        Container(
-          child: ExploreTitle(
-              title: explore.title,
-              description: explore.description,
-              onPressed: explore.onPressed),
-          padding: _styles.titlePadding,
-        ) : Container(),
-        Container(
-            width: _width,
-            padding: _styles.containerPadding,
-            height: 300,
-            child: ScrollSnapList(
-              itemBuilder: (context, index) =>
-                  _buildListItem(context, index, explore.exploreItems),
-              itemCount: explore.exploreItems.length,
-              itemSize: 200,
-              onItemFocus: (index) {},
-              selectedItemAnchor: SelectedItemAnchor.START,
-              endOfListTolerance: 16,
-            ))
-      ],
+    return StoreConnector<TvlkTestAppState, ExploreViewModel>(
+      builder: (_, viewModel) => Column(
+        children: [
+          viewModel.explore.title != "" || viewModel.explore.description != ""
+              ? Container(
+                  child: ExploreTitle(
+                      title: viewModel.explore.title,
+                      description: viewModel.explore.description,
+                      onPressed: viewModel.explore.onPressed),
+                  padding: _styles.titlePadding,
+                )
+              : Container(),
+          Container(
+              width: _width,
+              padding: _styles.containerPadding,
+              height: 300,
+              child: ScrollSnapList(
+                itemBuilder: (context, index) => _buildListItem(
+                    context, index, viewModel.explore.exploreItems),
+                itemCount: viewModel.explore.exploreItems.length,
+                itemSize: 200,
+                onItemFocus: (index) {},
+                selectedItemAnchor: SelectedItemAnchor.START,
+                endOfListTolerance: 16,
+              ))
+        ],
+      ),
+      converter: (store) => ExploreViewModel.fromStore(store, index),
     );
   }
 }

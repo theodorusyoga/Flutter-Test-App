@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:redux/redux.dart';
 
 import '../model/explore_model.dart';
 import '../mocks/explore_data.dart';
+import '../redux/state.dart';
 
 class ExploreViewModel extends ChangeNotifier {
-  late ExploreModel explore;
+  final ExploreModel explore;
 
-  ExploreViewModel();
+  ExploreViewModel({required this.explore});
 
-  Future<void> loadData(int index) async {
-    explore = exploreMocks[index];
-    // implement calling API if any
+  static ExploreViewModel fromStore(Store<TvlkTestAppState> store, int index) {
+    return ExploreViewModel(explore: exploreMocks[index]);
   }
 }

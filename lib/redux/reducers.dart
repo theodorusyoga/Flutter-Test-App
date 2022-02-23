@@ -6,7 +6,7 @@ import './state.dart';
 // define any state setter here
 TvlkTestAppState _setGlobalLoading(
     TvlkTestAppState state, SetGlobalLoadingAction action) {
-  return TvlkTestAppState(isLoading: action.isLoading);
+  return TvlkTestAppState(isLoading: action.isLoading, explores: state.explores);
 }
 
 // global reducer 

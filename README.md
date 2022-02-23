@@ -40,7 +40,6 @@ To run the project, simply run: `flutter run`
 - `flutter_spinkit`: for loading indicator
 - `flutter_redux` and `redux`: used for centralized state management. In the app, redux is only used to determine whether loading indicator is shown
 - `intl`: for currency converter
-- `provider`: for InheritedWidget wrapper
 - `redux_thunk`: middleware for redux, making action execution easier
 - `scroll_snap_list`: to display horizontal list view for food/services list, which is the extension of `ListView`
 - `sticky_headers`: to display the title of food/services list
