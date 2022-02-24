@@ -5,7 +5,7 @@ import 'package:tvlk_test_app/redux/actions.dart';
 import 'package:tvlk_test_app/redux/state.dart';
 import 'package:tvlk_test_app/redux/reducers.dart';
 import 'package:tvlk_test_app/mocks/explore_data.dart';
-import './mocks/reducer_mocks.dart';
+import '../mocks/reducer_mocks.dart';
 
 void main() {
   late Store<TvlkTestAppState> store;

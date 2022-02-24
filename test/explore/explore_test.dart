@@ -16,20 +16,22 @@ void main() {
     viewModel = ExploreViewModel.fromStore(store, 0); // initiate with index 0
   });
 
-  test('initial values are correct', () {
-    ExploreModel explore = viewModel.explore;
-    expect(explore, exploreMocks[0]);
-  });
+  group('view model', () {
+    test('initial values are correct', () {
+      ExploreModel explore = viewModel.explore;
+      expect(explore, exploreMocks[0]);
+    });
 
-  test('values with index 1 are correct', () {
-    viewModel = ExploreViewModel.fromStore(store, 1);
-    ExploreModel explore = viewModel.explore;
-    expect(explore, exploreMocks[1]);
-  });
+    test('values with index 1 are correct', () {
+      viewModel = ExploreViewModel.fromStore(store, 1);
+      ExploreModel explore = viewModel.explore;
+      expect(explore, exploreMocks[1]);
+    });
 
-  test('values with index 2 are correct', () {
-    viewModel = ExploreViewModel.fromStore(store, 2);
-    ExploreModel explore = viewModel.explore;
-    expect(explore, exploreMocks[2]);
+    test('values with index 2 are correct', () {
+      viewModel = ExploreViewModel.fromStore(store, 2);
+      ExploreModel explore = viewModel.explore;
+      expect(explore, exploreMocks[2]);
+    });
   });
 }

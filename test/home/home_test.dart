@@ -14,14 +14,17 @@ void main() {
     viewModel = HomeViewModel.fromStore(store);
   });
 
-  test('initial values are correct', () {
-    bool isLoading = viewModel.isLoading;
-    expect(isLoading, true);
+  group('view model', () {
+    test('initial values are correct', () {
+      bool isLoading = viewModel.isLoading;
+      expect(isLoading, true);
+    });
+
+    test('dispatched values are correct', () {
+      viewModel.setIsLoading(false);
+      viewModel = HomeViewModel.fromStore(store);
+      expect(viewModel.isLoading, false);
+    });
   });
 
-  test('dispatched values are correct', () {
-    viewModel.setIsLoading(false);
-    viewModel = HomeViewModel.fromStore(store);
-    expect(viewModel.isLoading, false);
-  });
 }

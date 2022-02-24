@@ -32,13 +32,15 @@ class ExploreItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          child: Text(exploreItem.location, style: _styles.locationTextStyle),
+          child: Text(exploreItem.location,
+              key: const Key("itemLocation"), style: _styles.locationTextStyle),
           decoration: BoxDecoration(
               color: colors[ColorName.orangeTooltip],
               borderRadius: _styles.tooltipBorderRadius),
           padding: _styles.tooltipPadding,
         ),
         CupertinoButton(
+          key: const Key("itemBookmarkButton"),
           child: Icon(Icons.bookmark, size: 32, color: colors[ColorName.white]),
           onPressed: () => onBookmarkPressed(exploreItem.id),
           minSize: 0,
@@ -64,8 +66,8 @@ class ExploreItem extends StatelessWidget {
     );
 
     return CupertinoButton(
-        child: 
-        Container(
+        key: const Key("itemButton"),
+        child: Container(
           alignment: Alignment.topLeft,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,12 +75,14 @@ class ExploreItem extends StatelessWidget {
               _image,
               const SizedBox(height: 8),
               Text(exploreItem.name,
+                  key: const Key("itemName"),
                   maxLines: 2,
                   style: normalTextStyleBold,
                   textAlign: TextAlign.left),
               const SizedBox(height: 4),
               exploreItem.description != ""
                   ? Text(exploreItem.description!,
+                      key: const Key("itemDescription"),
                       maxLines: 1,
                       style: normalTextStyle,
                       textAlign: TextAlign.left)
