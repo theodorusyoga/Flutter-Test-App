@@ -5,6 +5,8 @@ A clone of Traveloka landing page (but not everything 👀). My first project us
 ## Quick Preview
 
 The GIF says it all~
+Basically, the app consists of 2 screens: `Home` and `Search` screen. You can go to `Search` screen by clicking the search box on the header section.
+Bonus: the placeholder of the search input box is animated to match the behavior of TVLK app (for research purposes 🙈), using `Tween<Offset>`.
 
 ![demo-app](https://github.com/theodorusyoga/Flutter-Test-App/blob/master/demo.gif?raw=true)
 
