@@ -29,6 +29,7 @@ The GIF says it all~
          ├── components     # Small widgets from respective screen or components
       ├── view_model        # MVVM View Model, since no API is provided, we use view model to retrieve data from mocks
       ├── test              # Test files
+         ├── mocks          # Mock data for test files
 
 ## Getting Started
 
