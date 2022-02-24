@@ -1,9 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:redux/redux.dart';
 
-import 'package:tvlk_test_app/mocks/explore_data.dart';
 import 'package:tvlk_test_app/mocks/menu_data.dart';
-import 'package:tvlk_test_app/model/explore_model.dart';
 import 'package:tvlk_test_app/model/menu_model.dart';
 import 'package:tvlk_test_app/redux/state.dart';
 import 'package:tvlk_test_app/redux/reducers.dart';
