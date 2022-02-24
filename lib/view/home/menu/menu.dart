@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../../model/menu_model.dart';
 import './menuitem.dart';
 import './styles.dart';
+import '../../../redux/state.dart';
+import '../../../view_model/menu.dart';
 
 class Menu extends StatefulWidget {
-  const Menu({Key? key, required this.menus}) : super(key: key);
-
-  final List<List<MenuModel>> menus;
+  const Menu({Key? key}) : super(key: key);
 
   @override
   State<Menu> createState() => _MenuState();
@@ -41,7 +42,7 @@ class _MenuState extends State<Menu> {
       });
     }
 
-    List<Widget> _gestureIndicator = widget.menus
+    List<Widget> _getGestureIndicator(List<List<MenuModel>> menus) => menus
         .asMap()
         .entries
         .map((entry) => GestureDetector(
@@ -58,7 +59,7 @@ class _MenuState extends State<Menu> {
             )))
         .toList();
 
-    List<Widget> _menus = widget.menus
+    List<Widget> _getMenus(List<List<MenuModel>> menus) => menus
         .map<Widget>((menu) => Container(
               child: Wrap(
                 children: _renderMenuItem(menu),
@@ -68,18 +69,20 @@ class _MenuState extends State<Menu> {
             ))
         .toList();
 
-    return Column(
-      children: [
-        CarouselSlider(
-          carouselController: _controller,
-          items: _menus,
-          options: _styles.carouselOptions(_onCarouselPageChanged),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _gestureIndicator,
-        )
-      ],
-    );
+    return StoreConnector<TvlkTestAppState, MenuViewModel>(
+        builder: (_, viewModel) => Column(
+              children: [
+                CarouselSlider(
+                  carouselController: _controller,
+                  items: _getMenus(viewModel.menus),
+                  options: _styles.carouselOptions(_onCarouselPageChanged),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: _getGestureIndicator(viewModel.menus),
+                )
+              ],
+            ),
+            converter: (store) => MenuViewModel.fromStore(store));
   }
 }

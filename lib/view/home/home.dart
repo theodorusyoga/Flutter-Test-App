@@ -9,7 +9,6 @@ import './menu/menu.dart';
 import './points/points.dart';
 
 import '../../assets/colors.dart';
-import '../../mocks/menu_data.dart';
 import './explore/explore.dart';
 import '../../view_model/home.dart';
 import '../../redux/actions.dart';
@@ -64,7 +63,7 @@ class _HomeState extends State<Home> {
 
     final _contents = [
       Points(),
-      Menu(menus: [menuMocks, menuMocks, menuMocks]),
+      const Menu(),
       Column(
         children: _explores,
       )
