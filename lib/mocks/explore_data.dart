@@ -1,12 +1,11 @@
-
 import '../model/explore_model.dart';
 import '../model/explore_item_model.dart';
 
 List<ExploreModel> exploreMocks = <ExploreModel>[
   ExploreModel(
+      id: 'uuid-1',
       title: 'Discover your new favorite meal',
       description: 'Inspired by Eats you explored',
-      onPressed: () {},
       exploreItems: <ExploreItemModel>[
         ExploreItemModel(
           id: 'uuid-example-1',
@@ -15,7 +14,7 @@ List<ExploreModel> exploreMocks = <ExploreModel>[
           location: 'Serpong',
           imagePath: 'lib/assets/images/sambal_matah.jpg',
         ),
-         ExploreItemModel(
+        ExploreItemModel(
           id: 'uuid-example-2',
           name: 'Sate Mak Syukur Bintaro',
           description: 'Indonesian',
@@ -31,9 +30,9 @@ List<ExploreModel> exploreMocks = <ExploreModel>[
         ),
       ]),
   ExploreModel(
+      id: 'uuid-2',
       title: 'Nearest COVID-19 test facilities',
       description: '',
-      onPressed: () {},
       exploreItems: <ExploreItemModel>[
         ExploreItemModel(
           id: 'uuid-example-1',
@@ -50,10 +49,10 @@ List<ExploreModel> exploreMocks = <ExploreModel>[
           imagePath: 'lib/assets/images/hospital_2.jpg',
         ),
       ]),
-      ExploreModel(
+  ExploreModel(
+      id: 'uuid-3',
       title: '',
       description: '',
-      onPressed: () {},
       exploreItems: <ExploreItemModel>[
         ExploreItemModel(
           id: 'uuid-example-1',
@@ -84,10 +83,10 @@ List<ExploreModel> exploreMocks = <ExploreModel>[
           imagePath: 'lib/assets/images/sambal_matah.jpg',
         )
       ]),
-      ExploreModel(
+  ExploreModel(
+      id: 'uuid-4',
       title: '',
       description: '',
-      onPressed: () {},
       exploreItems: <ExploreItemModel>[
         ExploreItemModel(
           id: 'uuid-example-1',

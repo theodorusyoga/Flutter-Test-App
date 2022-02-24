@@ -27,6 +27,10 @@ class Explore extends StatelessWidget {
     // implement onpressed
   }
 
+  void _onHeaderPressed(String id) {
+    // implement header pressed
+  }
+
   Widget _buildListItem(
       BuildContext context, int index, List<ExploreItemModel> items) {
     return ExploreItem(
@@ -49,7 +53,7 @@ class Explore extends StatelessWidget {
                   child: ExploreTitle(
                       title: viewModel.explore.title,
                       description: viewModel.explore.description,
-                      onPressed: viewModel.explore.onPressed),
+                      onPressed: () => _onHeaderPressed(viewModel.explore.id)),
                   padding: _styles.titlePadding,
                 )
               : Container(),

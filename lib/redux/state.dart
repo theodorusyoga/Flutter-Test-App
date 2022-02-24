@@ -14,6 +14,6 @@ class TvlkTestAppState {
   const TvlkTestAppState({required this.isLoading, required this.explores, required this.menus});
 
   factory TvlkTestAppState.initial() {
-    return TvlkTestAppState(isLoading: true, explores: exploreMocks, menus: [menuMocks, menuMocks, menuMocks]);
+    return TvlkTestAppState(isLoading: true, explores: exploreMocks, menus: [menuMocks, menuMocks, menuMocks]); // 3 of menu mocks 
   }
 }
