@@ -32,10 +32,36 @@ Bonus: the placeholder of the search input box is animated to match the behavior
       ├── view_model        # MVVM View Model, since no API is provided, we use view model to retrieve data from mocks
       ├── test              # Test files
          ├── mocks          # Mock data for test files
+         ├── ...            # Widget folder to be tested
 
 ## Getting Started
 
 To run the project, simply run: `flutter run`
+
+## Unit Test Coverage
+
+What has been accomplished:
+
+- Redux unit test
+- View model unit test
+- Widget test only on: `MenuItem` and `ExploreItem`
+
+What can be improved:
+
+- Functional test
+- Integration test (we need a working API)
+
+To run unit test with code coverage without including assets and styles, please run below command.
+
+```
+flutter test --coverage && lcov --remove coverage/lcov.info '**/styles.dart' 'lib/assets/*'  -o coverage/new_lcov.info && genhtml coverage/new_lcov.info -o coverage/html
+```
+
+To see your code coverage, go to `coverage/html/index.html`.
+
+### Coverage status:
+
+![cov-stat](https://github.com/theodorusyoga/Flutter-Test-App/blob/master/cov_status.png?raw=true)
 
 ## Packages Used
 

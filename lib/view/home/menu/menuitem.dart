@@ -36,9 +36,10 @@ class MenuItem extends StatelessWidget {
     final double _itemWidth = _widthWithoutPadding / numberOfItems;
 
     final _iconImage = Container(
+      key: const Key('itemIconBox'),
       child: Center(
           child:
-              Icon(menuModel.icon, size: 26, color: menuModel.iconColor ?? colors[ColorName.white])),
+              Icon(menuModel.icon, size: 26,  key: const Key('itemIcon'), color: menuModel.iconColor ?? colors[ColorName.white])),
       width: iconSize,
       height: iconSize,
       decoration: _styles.imageBoxDecoration(menuModel.bgColor),
@@ -46,11 +47,12 @@ class MenuItem extends StatelessWidget {
 
     return Container(
       child: CupertinoButton(
+          key: const Key('itemButton'),
           child: Column(
             children: [
               _iconImage,
               const SizedBox(height: 4),
-              Text(menuModel.menuName, style: _styles.menuItemTextStyle, textAlign: TextAlign.center,)
+              Text(menuModel.menuName,  key: const Key('itemTitle'), style: _styles.menuItemTextStyle, textAlign: TextAlign.center,)
             ],
           ),
           onPressed: () => onMenuItemPressed(),
